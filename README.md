@@ -122,7 +122,7 @@ Failures surface as typed exceptions, all extending `Exceptions\VelocityFleetExc
 |---|---|
 | `NotConnectedException` | No token available (and none could be obtained) |
 | `AuthenticationException` | `401` / `403` after a refresh attempt — re-authorise |
-| `ApiException` | Any other API error or transport failure (carries `->status` and `->body`) |
+| `ApiException` | Any other API error or transport failure (carries `->status`, `->body`, `->headers`, `header()`, and `retryAfter()`) |
 
 ```php
 use ChrisJohnLeah\VelocityFleet\Exceptions\ApiException;

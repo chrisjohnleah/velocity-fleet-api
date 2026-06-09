@@ -7,13 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.1] - 2026-06-09
+
 ### Added
-- Initial v0.1 read SDK for the Radius Velocity Fleet API, built on Saloon v4.
+- `ApiException::header()` — case-insensitive lookup of a response header from a failed request.
+- `ApiException::retryAfter()` — the wait, in seconds, parsed from the `Retry-After` header (RFC 9110: both delay-seconds and HTTP-date forms), so callers can back off correctly on a `429`.
+
+## [0.1.0] - 2026-06-09
+
+### Added
+- Initial read SDK for the Radius Velocity Fleet API, built on Saloon v4.
 - `VelocityFleetConnector`: Bearer auth, trailing-slash-safe endpoints, and exponential backoff on connection errors / 429 / 5xx.
 - `VelocityFleet` high-level client: static API-token auth (`withToken`), third-party refresh-token auth (`withRefreshToken`), an OAuth2 `refresh_token` exchange, proactive refresh before a known expiry, and reactive refresh-and-retry on a 401.
 - `TokenStore` contract with an in-memory `ArrayTokenStore`, plus a `StoredToken` value object.
 - Typed DTOs: `Customer`, `DevicePositions`, `DeviceGroup`, and `Device` (with `ignitionOn()` / `occurredAt()` helpers).
 - Resources: `customers()->list()` and `devicePositions()->forCustomer()` / `->devices()`.
-- Typed exception hierarchy: `VelocityFleetException`, `NotConnectedException`, `AuthenticationException`, `ApiException`.
+- Typed exception hierarchy: `VelocityFleetException`, `NotConnectedException`, `AuthenticationException`, `ApiException` (with `status`, `body`, `headers`).
 
-[Unreleased]: https://github.com/chrisjohnleah/velocity-fleet-api/commits/main
+[Unreleased]: https://github.com/chrisjohnleah/velocity-fleet-api/compare/v0.1.1...main
+[0.1.1]: https://github.com/chrisjohnleah/velocity-fleet-api/compare/v0.1.0...v0.1.1
+[0.1.0]: https://github.com/chrisjohnleah/velocity-fleet-api/releases/tag/v0.1.0

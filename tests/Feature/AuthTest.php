@@ -144,6 +144,28 @@ it('surfaces a non-JSON error body as an ApiException, not a JsonException', fun
     }
 });
 
+it('exposes response headers and parses Retry-After on a throttled (429) response', function () {
+    $connector = new VelocityFleetConnector();
+    $connector->tries = null; // single attempt, no backoff
+
+    $mock = new MockClient([
+        GetCustomers::class => MockResponse::make(
+            ['detail' => 'Request was throttled. Expected available in 120 seconds.'],
+            429,
+            ['Retry-After' => '120'],
+        ),
+    ]);
+
+    try {
+        velocityFleet($mock, null, $connector)->customers()->list();
+        $this->fail('Expected an ApiException.');
+    } catch (ApiException $exception) {
+        expect($exception->status)->toBe(429)
+            ->and($exception->retryAfter())->toBe(120)
+            ->and($exception->header('Retry-After'))->toBe('120');
+    }
+});
+
 it('refreshes at most once per 401 even when the new token is short-lived', function () {
     $store = new ArrayTokenStore(new StoredToken('stale-access', 'good-refresh'));
 
