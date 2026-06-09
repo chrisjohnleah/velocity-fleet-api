@@ -1,0 +1,19 @@
+# Changelog
+
+All notable changes to this project are documented here.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [Unreleased]
+
+### Added
+- Initial v0.1 read SDK for the Radius Velocity Fleet API, built on Saloon v4.
+- `VelocityFleetConnector`: Bearer auth, trailing-slash-safe endpoints, and exponential backoff on connection errors / 429 / 5xx.
+- `VelocityFleet` high-level client: static API-token auth (`withToken`), third-party refresh-token auth (`withRefreshToken`), an OAuth2 `refresh_token` exchange, proactive refresh before a known expiry, and reactive refresh-and-retry on a 401.
+- `TokenStore` contract with an in-memory `ArrayTokenStore`, plus a `StoredToken` value object.
+- Typed DTOs: `Customer`, `DevicePositions`, `DeviceGroup`, and `Device` (with `ignitionOn()` / `occurredAt()` helpers).
+- Resources: `customers()->list()` and `devicePositions()->forCustomer()` / `->devices()`.
+- Typed exception hierarchy: `VelocityFleetException`, `NotConnectedException`, `AuthenticationException`, `ApiException`.
+
+[Unreleased]: https://github.com/chrisjohnleah/velocity-fleet-api/commits/main

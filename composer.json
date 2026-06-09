@@ -1,0 +1,56 @@
+{
+    "name": "chrisjohnleah/velocity-fleet-api",
+    "description": "Framework-agnostic PHP SDK for the Radius Velocity Fleet Telematics API (customers + live device positions), built on Saloon.",
+    "keywords": ["velocity", "velocity-fleet", "radius", "telematics", "fleet", "kinesis", "api", "sdk", "saloon"],
+    "homepage": "https://github.com/chrisjohnleah/velocity-fleet-api",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Chris John Leah",
+            "email": "christopher.leah@happywebs.co.uk"
+        }
+    ],
+    "require": {
+        "php": "^8.3",
+        "saloonphp/saloon": "^4.0"
+    },
+    "require-dev": {
+        "laravel/pint": "^1.18",
+        "mockery/mockery": "^1.6",
+        "pestphp/pest": "^3.0",
+        "phpstan/extension-installer": "^1.4",
+        "phpstan/phpstan": "^2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "ChrisJohnLeah\\VelocityFleet\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ChrisJohnLeah\\VelocityFleet\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "pest",
+        "test:coverage": "pest --coverage",
+        "analyse": "phpstan analyse",
+        "format": "pint",
+        "lint": "pint --test",
+        "check": [
+            "@lint",
+            "@analyse",
+            "@test"
+        ]
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "phpstan/extension-installer": true
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
