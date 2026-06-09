@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.2] - 2026-06-09
+
+### Added
+- Bounded HTTP timeouts on `VelocityFleetConnector` (`connect_timeout` 10s, `timeout` 30s) — Guzzle defaults to no timeout, so a stalled connection could otherwise hang a request (and any caller's lock/job) indefinitely.
+
 ## [0.1.1] - 2026-06-09
 
 ### Added
@@ -24,6 +29,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Resources: `customers()->list()` and `devicePositions()->forCustomer()` / `->devices()`.
 - Typed exception hierarchy: `VelocityFleetException`, `NotConnectedException`, `AuthenticationException`, `ApiException` (with `status`, `body`, `headers`).
 
-[Unreleased]: https://github.com/chrisjohnleah/velocity-fleet-api/compare/v0.1.1...main
+[Unreleased]: https://github.com/chrisjohnleah/velocity-fleet-api/compare/v0.1.2...main
+[0.1.2]: https://github.com/chrisjohnleah/velocity-fleet-api/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/chrisjohnleah/velocity-fleet-api/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/chrisjohnleah/velocity-fleet-api/releases/tag/v0.1.0

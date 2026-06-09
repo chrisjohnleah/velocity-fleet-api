@@ -63,6 +63,20 @@ class VelocityFleetConnector extends Connector
         return ['Accept' => 'application/json'];
     }
 
+    /**
+     * Bounded HTTP timeouts so a stalled connection can't hang a request (or a
+     * poller job / cache lock) indefinitely. Guzzle defaults to no timeout.
+     *
+     * @return array<string, int>
+     */
+    protected function defaultConfig(): array
+    {
+        return [
+            'connect_timeout' => 10,
+            'timeout' => 30,
+        ];
+    }
+
     public function getTokenEndpoint(): ?string
     {
         return $this->tokenEndpoint;
